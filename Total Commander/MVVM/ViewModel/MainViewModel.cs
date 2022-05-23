@@ -77,12 +77,9 @@ namespace Total_Commander.MVVM.ViewModel
                 && LeftPanel.SelectedDirectory != ".." && RightPanel.CurrentPath != null)
                 return true;
 
-            if (RightPanel.SelectedDirectory != null
-                && !RightPanel.SelectedDirectory.Contains("<D>")
-                && RightPanel.SelectedDirectory != ".." && LeftPanel.CurrentPath != null)
-                return true;
-
-            return false;
+            return RightPanel.SelectedDirectory != null
+                   && !RightPanel.SelectedDirectory.Contains("<D>")
+                   && RightPanel.SelectedDirectory != ".." && LeftPanel.CurrentPath != null;
         }
     }
 }

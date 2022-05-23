@@ -29,7 +29,7 @@ namespace Total_Commander.MVVM.ViewModel
             {
                 _currentPath = value;
                 OnPropertyChanged(nameof(CurrentPath));
-                UpdateListBox();
+                UpdateDisplayContent();
             }
         }
 
@@ -104,7 +104,7 @@ namespace Total_Commander.MVVM.ViewModel
             CurrentPath = _currentDrive;
         }
 
-        private void UpdateListBox()
+        private void UpdateDisplayContent()
         {
             var content = new List<string>();
 
