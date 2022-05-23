@@ -1,0 +1,51 @@
+﻿<Window x:Class="Total_Commander.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Total_Commander"
+        xmlns:view="clr-namespace:Total_Commander.MVVM.View"
+        xmlns:viewModel="clr-namespace:Total_Commander.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" Background="Gray">
+    <Window.DataContext>
+      <viewModel:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <view:PanelTcView Grid.Row="0" 
+                          Grid.Column="0"
+                          Padding="10"
+                          CurrentPath="{Binding LeftPanel.CurrentPath, Mode=TwoWay}"
+                          CurrentDrive="{Binding LeftPanel.CurrentDrive, Mode=TwoWay}"
+                          Drives="{Binding LeftPanel.Drives}"
+                          DirectoryContent="{Binding LeftPanel.DirectoryContent}"
+                          SelectedDirectory="{Binding LeftPanel.SelectedDirectory, Mode=TwoWay}"
+                          DoubleClickCommand="{Binding LeftPanel.ChangeDirectoryCommand}"/>
+        <view:PanelTcView Grid.Row="0" 
+                          Grid.Column="1"
+                          Padding="10"
+                          CurrentPath="{Binding RightPanel.CurrentPath, Mode=TwoWay}"
+                          CurrentDrive="{Binding RightPanel.CurrentDrive, Mode=TwoWay}"
+                          Drives="{Binding RightPanel.Drives}"
+                          DirectoryContent="{Binding RightPanel.DirectoryContent}"
+                          SelectedDirectory="{Binding RightPanel.SelectedDirectory, Mode=TwoWay}"
+                          DoubleClickCommand="{Binding RightPanel.ChangeDirectoryCommand}"/>
+
+        <Button Command="{Binding CopyCommand }" 
+                Grid.Row="1" 
+                Grid.ColumnSpan="2" 
+                Grid.Column="0" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Padding="15,5,15,5" 
+                Content="copy &gt;&gt;"></Button>
+    </Grid>
+</Window>

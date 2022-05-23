@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Total_Commander.MVVM.View.PanelTcView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Total_Commander.MVVM.View"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400" x:Name="PanelTc">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center">
+
+            <Label Margin="0,0,30,0" 
+                   Content="path"  
+                   HorizontalContentAlignment="Center" 
+                   VerticalContentAlignment="Center"/>
+            <Label Width="300" 
+                   Background="White" 
+                   Content="{Binding ElementName=PanelTc, Path=CurrentPath}" 
+                   HorizontalContentAlignment="Left" 
+                   VerticalContentAlignment="Center"/>
+
+        </StackPanel>
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Right">
+
+            <Label Margin="0,0,30,0" 
+                   Content="drive" 
+                   HorizontalContentAlignment="Center" 
+                   VerticalContentAlignment="Center"/>
+            <ComboBox Width="100" 
+                      Background="White"
+                      HorizontalAlignment="Right" 
+                      ItemsSource="{Binding ElementName=PanelTc, Path=Drives}"
+                      SelectedItem="{Binding ElementName=PanelTc, Path=CurrentDrive}"/>
+
+        </StackPanel>
+        <ListBox Grid.Row="2" 
+                 ItemsSource="{Binding ElementName=PanelTc, Path=DirectoryContent}"
+                 SelectedItem="{Binding ElementName=PanelTc, Path=SelectedDirectory}">
+
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction 
+                        Command="{Binding ElementName=PanelTc, Path=DoubleClickCommand }"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </ListBox>
+    </Grid>
+</UserControl>
