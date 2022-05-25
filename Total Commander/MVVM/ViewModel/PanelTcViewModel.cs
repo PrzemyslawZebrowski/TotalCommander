@@ -8,9 +8,9 @@ namespace Total_Commander.MVVM.ViewModel
 {
     public class PanelTcViewModel : ObservableObject
     {
+        private string _currentPath;
         private string[] _drives;
         private string _currentDrive;
-        private string _currentPath;
         private string _selectedDirectory;
         private List<string> _directoryContent;
 
@@ -32,6 +32,15 @@ namespace Total_Commander.MVVM.ViewModel
                 UpdateDisplayContent();
             }
         }
+        public string[] Drives
+        {
+            get => _drives;
+            set
+            {
+                _drives = value;
+                OnPropertyChanged(nameof(Drives));
+            }
+        }
 
         public string CurrentDrive
         {
@@ -43,14 +52,13 @@ namespace Total_Commander.MVVM.ViewModel
                 UpdatePath();
             }
         }
-
-        public string[] Drives
+        public string SelectedDirectory
         {
-            get => _drives;
+            get => _selectedDirectory;
             set
             {
-                _drives = value;
-                OnPropertyChanged(nameof(Drives));
+                _selectedDirectory = value;
+                OnPropertyChanged(nameof(SelectedDirectory));
             }
         }
 
@@ -63,15 +71,9 @@ namespace Total_Commander.MVVM.ViewModel
                 OnPropertyChanged(nameof(DirectoryContent));
             }
         }
-
-        public string SelectedDirectory
+        private void GetDrives()
         {
-            get => _selectedDirectory;
-            set
-            {
-                _selectedDirectory = value;
-                OnPropertyChanged(nameof(SelectedDirectory));
-            }
+            Drives = Directory.GetLogicalDrives();
         }
 
         private void ChangeDirectory(object o)
@@ -81,9 +83,9 @@ namespace Total_Commander.MVVM.ViewModel
             else
             {
                 if (CurrentPath.EndsWith("\\"))
-                    CurrentPath += _selectedDirectory.Replace("<D> ", "");
+                    CurrentPath += _selectedDirectory.Replace("<D>", "");
                 else
-                    CurrentPath += "\\" + _selectedDirectory.Replace("<D> ", "");
+                    CurrentPath += "\\" + _selectedDirectory.Replace("<D>", "");
             }
         }
 
@@ -92,11 +94,6 @@ namespace Total_Commander.MVVM.ViewModel
             if (_selectedDirectory == "..") return true;
 
             return _selectedDirectory != null && _selectedDirectory.Contains("<D>");
-        }
-
-        private void GetDrives()
-        {
-            Drives = Directory.GetLogicalDrives();
         }
 
         private void UpdatePath()
@@ -110,12 +107,11 @@ namespace Total_Commander.MVVM.ViewModel
 
             var files = Directory.GetFiles(CurrentPath);
             var directories = Directory.GetDirectories(CurrentPath);
-            var parentFile = Directory.GetParent(CurrentPath);
 
-            if (parentFile != null)
+            if (Directory.GetParent(CurrentPath) != null)
                 content.Add("..");
 
-            content.AddRange(directories.Select(d => "<D> " + Path.GetFileName(d)));
+            content.AddRange(directories.Select(d => "<D>" + Path.GetFileName(d)));
 
             content.AddRange(files.Select(Path.GetFileName));
 
