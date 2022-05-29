@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Quiz.Core
+namespace Total_Commander.Core
 {
     internal class RelayCommand : ICommand
     {
@@ -24,6 +24,5 @@ namespace Quiz.Core
 
 
         public void Execute(object parameter) => _execute(parameter);
-
     }
 }

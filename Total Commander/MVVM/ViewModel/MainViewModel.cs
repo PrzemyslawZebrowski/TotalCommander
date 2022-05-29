@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Windows.Input;
-using Quiz.Core;
+using Total_Commander.Core;
 
 namespace Total_Commander.MVVM.ViewModel
 {

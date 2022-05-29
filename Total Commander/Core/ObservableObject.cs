@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Quiz.Core
+namespace Total_Commander.Core
 {
     public class ObservableObject : INotifyPropertyChanged
     {

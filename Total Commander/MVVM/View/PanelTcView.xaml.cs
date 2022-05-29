@@ -14,6 +14,7 @@ namespace Total_Commander.MVVM.View
         {
             InitializeComponent();
         }
+
         private static readonly DependencyProperty CurrentPathProperty =
             DependencyProperty.Register("CurrentPath", typeof(string), typeof(PanelTcView),
                 new FrameworkPropertyMetadata(null));
@@ -73,7 +74,6 @@ namespace Total_Commander.MVVM.View
             get => (ICommand)GetValue(DoubleClickCommandProperty);
             set => SetValue(DoubleClickCommandProperty, value);
         }
-
     }
 }
 
